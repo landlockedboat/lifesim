@@ -1,3 +1,7 @@
 .nextui-badge-root {
     width: 100%;
 }
+
+.nextui-backdrop-content {
+    padding: 10vw;
+}

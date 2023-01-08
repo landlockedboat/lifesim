@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { NextUIProvider } from '@nextui-org/react';
+import { Button, Checkbox, Input, Modal, NextUIProvider, Row, Text } from '@nextui-org/react';
 import { useReducer, useState } from 'react';
 
 import './App.css'
@@ -23,11 +23,46 @@ export default function App() {
     }])
   }
 
+  const [visible, setVisible] = React.useState(true);
+  const handler = () => setVisible(true);
+  const closeHandler = () => {
+    setVisible(false);
+    console.log("closed");
+  };
+
   return (
     <NextUIProvider>
       <Header age={playerState.age} />
       <LifeEventBoard lifeEvents={lifeEvents} />
-      <ActionBoard ageUp={ageUp} />
+      <ActionBoard playerState={playerState} ageUp={ageUp} />
+      <Modal
+        closeButton
+        blur
+        aria-labelledby="modal-title"
+        open={visible}
+        onClose={closeHandler}
+        // style={{padding: "10vw"}}
+      >
+        <Modal.Header>
+          <Text id="modal-title" size={18} b>
+            Do you want it?
+          </Text>
+        </Modal.Header>
+        <Modal.Body>
+          <div style={{display: "flex", flexDirection: "column", "alignItems": "center"}}>
+            <div style={{fontSize: "40px"}}>💊</div>
+            <div style={{textAlign: "center"}}>Grandma is offering you some Oxycodine. Do you accept it?</div>
+            </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button auto flat color="error" onPress={closeHandler}>
+            No
+          </Button>
+          <Button auto color="success" onPress={closeHandler}>
+            Yes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </NextUIProvider>
   );
 }
