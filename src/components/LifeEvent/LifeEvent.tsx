@@ -1,7 +1,13 @@
 import * as React from 'react';
 import { Badge, Card, Col, Row, Spacer, Text } from '@nextui-org/react';
+import { ILifeEvent } from './LifeEvent.types';
 
-const LifeEventBody = ({ lifeEvent }) => {
+
+interface IProps {
+    lifeEvent: ILifeEvent;
+}
+
+const LifeEventBody = ({ lifeEvent }: IProps) => {
 
     return (<Card variant='bordered'>
         <Card.Body>
@@ -13,7 +19,7 @@ const LifeEventBody = ({ lifeEvent }) => {
 
 }
 
-export const LifeEvent = ({ lifeEvent }) => {
+export const LifeEvent = ({ lifeEvent }: IProps) => {
     return (
         <>
             <Row gap={1}>

@@ -1,19 +1,18 @@
 import * as React from 'react';
 
-import { Avatar, Button, Card, Col, Container, NextUIProvider, Row, Spacer, Text } from '@nextui-org/react';
-
-import { LifeEventBoard } from './src/LifeEventBoard';
+import { NextUIProvider } from '@nextui-org/react';
 import { useState } from 'react';
 
 import './App.css'
-
+import { LifeEventBoard } from './src/components/LifeEventBoard';
+import { ILifeEvent } from './src/components/LifeEvent';
+import { Header } from './src/components/Header';
+import { ActionBoard } from './src/components/ActionBoard';
 
 export default function App() {
 
   const [age, setAge] = useState(0);
-
-
-  const [lifeEvents, setLifeEvents] = useState([]);
+  const [lifeEvents, setLifeEvents] = useState<ILifeEvent[]>([]);
 
   const ageUp = () => {
     const newAge = age + 1;
@@ -26,32 +25,9 @@ export default function App() {
 
   return (
     <NextUIProvider>
-      <Container>
-        <Spacer y={.5} />
-
-        <Row justify="flex-start" align="center">
-          <Avatar
-            size="lg"
-            src="https://i.pinimg.com/564x/31/31/16/313116194ee3e0e33ce059d855cdb559.jpg"
-            color="primary"
-            bordered
-          />
-          <Spacer x={.5} />
-          <div>
-          <Text style={{margin: 0}} h5>Wednesday Addams</Text>
-          <Text>Age: {age}</Text>
-          </div>
-        </Row>
-
-      </Container>
-
+      <Header age={age} />
       <LifeEventBoard lifeEvents={lifeEvents} />
-      <Container>
-        <Spacer y={1} />
-        <Row justify="center" align="center">
-          <Button size="md" onClick={(e) => ageUp()}>➕ Age</Button>
-        </Row>
-      </Container>
+      <ActionBoard ageUp={ageUp} />
     </NextUIProvider>
   );
 }
